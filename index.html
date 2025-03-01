@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тетрис</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-area">
+            <div class="side-panel left-panel">
+                <div class="score-board">
+                    <div class="score">Очки: <span id="score">0</span></div>
+                    <div class="level">Уровень: <span id="level">1</span></div>
+                    <div class="lines">Линии: <span id="lines">0</span></div>
+                </div>
+                <div class="next-piece">
+                    <h3>Следующая фигура:</h3>
+                    <canvas id="nextPiece" width="160" height="160"></canvas>
+                </div>
+            </div>
+            
+            <canvas id="tetris" width="320" height="640"></canvas>
+            
+            <div class="side-panel right-panel">
+                <div class="controls">
+                    <button id="startBtn">Начать игру</button>
+                    <button id="musicToggle">🎵 Музыка</button>
+                    <button id="soundToggle">🔊 Звук</button>
+                </div>
+                <div class="controls-info">
+                    <h3>Управление:</h3>
+                    <div class="control-item">
+                        <span class="key">←</span>
+                        <span class="action">Влево</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">→</span>
+                        <span class="action">Вправо</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">↓</span>
+                        <span class="action">Вниз</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">↑</span>
+                        <span class="action">Поворот</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">Пробел</span>
+                        <span class="action">Сброс</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">Enter</span>
+                        <span class="action">Пауза</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="gameOver" class="game-over hidden">
+            <div class="game-over-content">
+                <h2>Игра окончена!</h2>
+                <p>Ваш счет: <span id="finalScore">0</span></p>
+                <button id="restartBtn">Играть снова</button>
+            </div>
+        </div>
+    </div>
+    <script src="sound.js"></script>
+    <script src="tetris.js"></script>
+</body>
+</html> 
