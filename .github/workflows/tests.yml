@@ -48,22 +48,10 @@ jobs:
     - name: Update README with coverage
       if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.node-version == '20.x'
       run: |
-        # Выводим содержимое файла с отчетом о покрытии для отладки
-        echo "Содержимое файла с отчетом о покрытии:"
-        cat coverage/lcov-report/index.html | grep -A 10 "clearfix"
-        
-        # Получаем данные о покрытии из файла lcov.info
-        LINES_COVERAGE=$(grep -A 3 "SF:" coverage/lcov.info | grep "LF:" | head -1 | cut -d ":" -f 2)
-        LINES_COVERED=$(grep -A 3 "SF:" coverage/lcov.info | grep "LH:" | head -1 | cut -d ":" -f 2)
-        LINES_PERCENTAGE=$(echo "scale=2; $LINES_COVERED * 100 / $LINES_COVERAGE" | bc)
-        
-        BRANCHES_COVERAGE=$(grep -A 10 "SF:" coverage/lcov.info | grep "BRF:" | head -1 | cut -d ":" -f 2)
-        BRANCHES_COVERED=$(grep -A 10 "SF:" coverage/lcov.info | grep "BRH:" | head -1 | cut -d ":" -f 2)
-        BRANCHES_PERCENTAGE=$(echo "scale=2; $BRANCHES_COVERED * 100 / $BRANCHES_COVERAGE" | bc)
-        
-        FUNCTIONS_COVERAGE=$(grep -A 6 "SF:" coverage/lcov.info | grep "FNF:" | head -1 | cut -d ":" -f 2)
-        FUNCTIONS_COVERED=$(grep -A 6 "SF:" coverage/lcov.info | grep "FNH:" | head -1 | cut -d ":" -f 2)
-        FUNCTIONS_PERCENTAGE=$(echo "scale=2; $FUNCTIONS_COVERED * 100 / $FUNCTIONS_COVERAGE" | bc)
+        # Получаем данные о покрытии напрямую из отчета
+        LINES_PERCENTAGE=$(cat coverage/lcov-report/index.html | grep -o 'Statements.*%' | sed 's/Statements.*>\([0-9.]*\)%/\1/')
+        FUNCTIONS_PERCENTAGE=$(cat coverage/lcov-report/index.html | grep -o 'Functions.*%' | sed 's/Functions.*>\([0-9.]*\)%/\1/')
+        BRANCHES_PERCENTAGE=$(cat coverage/lcov-report/index.html | grep -o 'Branches.*%' | sed 's/Branches.*>\([0-9.]*\)%/\1/')
         
         # Выводим данные для отладки
         echo "Покрытие строк: $LINES_PERCENTAGE%"
