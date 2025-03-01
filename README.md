@@ -35,6 +35,7 @@
 │   └── sound.test.js   # Тесты для sound.js
 ├── jest.config.js      # Конфигурация Jest
 ├── jest.setup.js       # Настройка окружения для тестов
+├── package-lock.json   # Файл блокировки зависимостей
 ├── package.json        # Зависимости и скрипты
 └── .github/            # Конфигурация GitHub Actions
     └── workflows/      # Рабочие процессы CI/CD
