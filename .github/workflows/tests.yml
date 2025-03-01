@@ -53,10 +53,18 @@ jobs:
         FUNCTIONS_COVERAGE=$(cat coverage/lcov-report/index.html | grep -o 'functions.*%' | sed 's/functions\s*:\s*\([0-9.]*\)%/\1/')
         BRANCHES_COVERAGE=$(cat coverage/lcov-report/index.html | grep -o 'branches.*%' | sed 's/branches\s*:\s*\([0-9.]*\)%/\1/')
         
+        # Выводим данные для отладки
+        echo "Покрытие строк: ${LINES_COVERAGE}%"
+        echo "Покрытие функций: ${FUNCTIONS_COVERAGE}%"
+        echo "Покрытие ветвлений: ${BRANCHES_COVERAGE}%"
+        
         # Обновляем README.md
-        sed -i "s/- Строки: [0-9.]*%/- Строки: ${LINES_COVERAGE}%/" README.md
-        sed -i "s/- Функции: [0-9.]*%/- Функции: ${FUNCTIONS_COVERAGE}%/" README.md
-        sed -i "s/- Ветвления: [0-9.]*%/- Ветвления: ${BRANCHES_COVERAGE}%/" README.md
+        sed -i "s/- Строки: .*%/- Строки: ${LINES_COVERAGE}%/" README.md
+        sed -i "s/- Функции: .*%/- Функции: ${FUNCTIONS_COVERAGE}%/" README.md
+        sed -i "s/- Ветвления: .*%/- Ветвления: ${BRANCHES_COVERAGE}%/" README.md
+        
+        # Проверяем изменения
+        git diff README.md
         
         # Настраиваем Git
         git config --global user.name "github-actions[bot]"
