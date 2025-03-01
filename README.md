@@ -1,7 +1,7 @@
 # Тетрис
 
-[![Tests Status](https://github.com/username/tetris/actions/workflows/tests.yml/badge.svg)](https://github.com/username/tetris/actions/workflows/tests.yml)
-[![Coverage Status](https://github.com/username/tetris/actions/workflows/tests.yml/badge.svg?branch=main&event=coverage)](https://github.com/username/tetris/actions/workflows/tests.yml)
+[![Tests Status](https://github.com/Spider-Dad/tetris_classic/actions/workflows/tests.yml/badge.svg)](https://github.com/Spider-Dad/tetris_classic/actions/workflows/tests.yml)
+[![Coverage Status](https://github.com/Spider-Dad/tetris_classic/actions/workflows/tests.yml/badge.svg?branch=main&event=coverage)](https://github.com/Spider-Dad/tetris_classic/actions/workflows/tests.yml)
 
 Классическая игра Тетрис, реализованная на JavaScript с использованием HTML5 Canvas.
 
