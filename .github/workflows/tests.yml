@@ -45,6 +45,8 @@ jobs:
     
     - name: Update README with coverage
       if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.node-version == '20.x'
+      env:
+        PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
       run: |
         # Получаем данные о покрытии
         LINES_COVERAGE=$(cat coverage/lcov-report/index.html | grep -o 'statements.*%' | sed 's/statements\s*:\s*\([0-9.]*\)%/\1/')
@@ -63,4 +65,4 @@ jobs:
         # Коммитим изменения
         git add README.md
         git commit -m "Update coverage in README [skip ci]"
-        git push https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git HEAD:main 
+        git push https://Spider-Dad:${PAT_TOKEN}@github.com/Spider-Dad/tetris_classic.git HEAD:main 
