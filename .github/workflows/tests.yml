@@ -64,13 +64,17 @@ jobs:
         sed -i "s/- Ветвления: .*%/- Ветвления: 97.19%/" README.md
         
         # Проверяем изменения
-        git diff README.md
-        
-        # Настраиваем Git
-        git config --global user.name "github-actions[bot]"
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        
-        # Коммитим изменения
-        git add README.md
-        git commit -m "Update coverage in README [skip ci]"
-        git push 
+        if [[ -n "$(git diff README.md)" ]]; then
+          echo "Обнаружены изменения в README.md, коммитим их"
+          
+          # Настраиваем Git
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Коммитим изменения
+          git add README.md
+          git commit -m "Update coverage in README [skip ci]"
+          git push
+        else
+          echo "Изменений в README.md нет, коммит не требуется"
+        fi 
